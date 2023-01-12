@@ -1,7 +1,7 @@
 ---
 - name: Configure the database to under access control
   become: true
-  ldap_attrs:
+  community.general.ldap_attrs:
     dn: '{{ slapd_olcDatabase_type_dn }}'
     attributes:
       olcAccess:

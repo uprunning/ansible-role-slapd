@@ -215,7 +215,7 @@
 #
 - name: Ensure slapd of global config options included olcServerID
   become: true
-  ldap_attrs:
+  community.general.ldap_attrs:
     dn: "cn=config"
     attributes:
       olcServerID: '{{ slapd_replication_id_url_list }}'
@@ -303,7 +303,7 @@
 
 - name: Start up the provider and a consumer/s on the backend (1/2)
   become: true
-  ldap_attrs:
+  community.general.ldap_attrs:
     dn: '{{ slapd_olcDatabase_type_dn }}'
     attributes:
       olcLimits: >-
@@ -317,7 +317,7 @@
 
 - name: Start up the provider and a consumer/s on the backend (2/2)
   become: true
-  ldap_attrs:
+  community.general.ldap_attrs:
     dn: '{{ slapd_olcDatabase_type_dn }}'
     attributes:
       olcMirrorMode: 'TRUE'

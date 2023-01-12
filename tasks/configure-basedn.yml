@@ -62,7 +62,7 @@
 
 - name: Configure LDAP root to password
   become: true
-  ldap_attrs:
+  community.general.ldap_attrs:
     dn: "olcDatabase={0}config,cn=config"
     attributes:
       olcRootPW: '{{ ldap_root_hashed_passwd }}'
@@ -71,7 +71,7 @@
     - molecule-idempotence-notest
 
 - name: Ensure baseDN
-  ldap_attrs:
+  community.general.ldap_attrs:
     dn: '{{ ldap_basedn }}'
     bind_pw: "{{ ldap_root_passwd }}"
     attributes:
