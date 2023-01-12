@@ -2,10 +2,10 @@
 dependency:
   name: galaxy
 driver:
-  name: docker
+  name: podman
 platforms:
   - name: instance
-    image: geerlingguy/docker-${MOLECULE_DISTRO:-ubuntu2004}-ansible:latest
+    image: geerlingguy/docker-${MOLECULE_DISTRO:-ubuntu2204}-ansible:latest
     privileged: true
     command: /sbin/init
     tmpfs:
@@ -14,7 +14,7 @@ platforms:
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     groups:
-      - ${MOLECULE_DISTRO:-ubuntu2004}
+      - ${MOLECULE_DISTRO:-ubuntu2204}
 provisioner:
   name: ansible
   options:
@@ -36,7 +36,7 @@ provisioner:
         slapd_install_module_syncprov: true
 
         slapd_replication: true
-        slapd_replication_group: ${MOLECULE_DISTRO:-ubuntu2004}
+        slapd_replication_group: ${MOLECULE_DISTRO:-ubuntu2204}
         slapd_replication_target_list:
           - id: 1
             url: 'ldap://ldap01.test.example.com'
