@@ -1,0 +1,31 @@
+---
+- name: "Check the {{ slapd_schema_custom }} schema was already exists"
+  become: true
+  community.general.ldap_search:
+    dn: "cn=schema,cn=config"
+    schema: true
+    scope: "onelevel"
+    filter: "(&(cn={*}{{ slapd_schema_custom }})(objectClass=olcSchemaConfig))"
+  check_mode: false
+  register: schema_custom
+  when: slapd_schema_custom_dn is not defined
+
+- name: Define slapd_schema_custom_dn
+  set_fact:
+    slapd_schema_custom_dn: >-
+      {%- if schema_custom.results[0] is defined -%}
+      {{ schema_custom.results[0].dn }}
+      {%- else -%}
+      cn={{ slapd_schema_custom }},cn=schema,cn=config
+      {%- endif -%}
+  when: slapd_schema_custom_dn is not defined
+
+- name: "Ensure the {{ slapd_schema_custom }} schema was registered"
+  become: true
+  ldap_entry:
+    dn: "{{ slapd_schema_custom_dn }}"
+    objectClass: "olcSchemaConfig"
+    attributes:
+      cn: "misc"
+      olcAttributeTypes: "{{ slapd_schema_custom_attributetypes }}"
+      olcObjectClasses: "{{ slapd_schema_custom_objectclasses }}"

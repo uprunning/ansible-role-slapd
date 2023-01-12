@@ -74,6 +74,14 @@ slapd_install_schema_misc: false
 slapd_install_schema_ssh_lpk: false
 slapd_install_schema_sudo: false
 slapd_install_schema_samba3: false
+slapd_install_schema_custom: false
+
+# Define following values to install your custom schema
+slapd_schema_custom: "my_custom_schema"
+# Set below if you to insert schema to a custom DN.
+# slapd_schema_custom_dn: "cn=my_custom_schema,cn=schema,cn=config"
+slapd_schema_custom_attributetypes: []
+slapd_schema_custom_objectclasses: []
 
 # Select whether or not to install the modules.
 slapd_install_module_refint: false
