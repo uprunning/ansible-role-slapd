@@ -6,6 +6,7 @@
     scope: "onelevel"
     filter: "(&(objectClass=olcDatabaseConfig)(olcDatabase={{ slapd_db_type }}))"
   check_mode: false
+  changed_when: false
   register: tmp_slapd_olcDatabase_type
   tags:
     - always
