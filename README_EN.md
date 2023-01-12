@@ -145,7 +145,7 @@ Specify a list of hosts to perform replication. Normally, it is `slapd_replicati
 
 ## Dependencies
 
-None.
+`community.general` collection
 
 ## Example Playbook
 

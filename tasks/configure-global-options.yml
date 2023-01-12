@@ -1,7 +1,7 @@
 ---
 - name: Ensure slapd of global config options were configured
   become: true
-  ldap_attrs:
+  community.general.ldap_attrs:
     dn: "cn=config"
     attributes:
       olcIdleTimeout: '{{ slapd_idletimeout | default(omit) }}'
