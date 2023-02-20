@@ -72,16 +72,15 @@
   tags:
     - molecule-idempotence-notest
 
-# Fails with desc: Insufficient access, msg: Attribute action failed.
-# - name: Ensure baseDN
-#   community.general.ldap_attrs:
-#     dn: '{{ ldap_basedn }}'
-#     bind_pw: "{{ ldap_root_passwd }}"
-#     attributes:
-#       dc: '{{ ldap_base_head }}'
-#       o: '{{ ldap_organization_name }}'
-#       objectClass:
-#         - top
-#         - dcObject
-#         - organization
-#     state: exact
+- name: Ensure baseDN
+  community.general.ldap_attrs:
+    dn: '{{ ldap_basedn }}'
+    bind_pw: "{{ ldap_root_passwd }}"
+    attributes:
+      dc: '{{ ldap_base_head }}'
+      o: '{{ ldap_organization_name }}'
+      objectClass:
+        - top
+        - dcObject
+        - organization
+    state: exact
