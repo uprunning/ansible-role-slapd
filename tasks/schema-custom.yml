@@ -27,6 +27,13 @@
     - never
     - debug
 
+- name: "Ensure the {{ slapd_schema_custom }} schema is deleted"
+  become: true
+  ldap_entry:
+    dn: "{{ slapd_schema_custom_dn }}"
+    objectClass: "olcSchemaConfig"
+    state: absent
+
 - name: "Ensure the {{ slapd_schema_custom }} schema was registered"
   become: true
   ldap_entry:
