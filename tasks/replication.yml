@@ -87,7 +87,7 @@
                      'credentials={passwd} searchbase="cn=config" type=refreshAndPersist '
                     'retry="5 5 300 5" timeout=1' -%}
       {% if slapd_replication_tls_reqcert is defined -%}
-        {%- set stmt = stmt ~ ' tls_reqcert={slapd_replication_tls_reqcert}' -%}
+        {%- set stmt = [stmt,' tls_reqcert=', slapd_replication_tls_reqcert] | join -%}
       {%- endif -%}
       {%- for target in slapd_replication_target_list -%}
       {%-   set _ = r.append(stmt.format(rid=loop.index, url=target['url'],
@@ -122,7 +122,7 @@
                      'credentials={passwd} searchbase="{basedn}" type=refreshOnly '
                      'interval=00:00:00:10 retry="5 5 300 5" timeout=1' -%}
       {% if slapd_replication_tls_reqcert is defined -%}
-        {%- set stmt = stmt ~ ' tls_reqcert={slapd_replication_tls_reqcert}' -%}
+        {%- set stmt = [stmt,' tls_reqcert=', slapd_replication_tls_reqcert] | join -%}
       {%- endif -%}
       {%- for target in slapd_replication_target_list -%}
       {%-   set rid = slapd_replication_sync_conf_list | length + loop.index -%}
