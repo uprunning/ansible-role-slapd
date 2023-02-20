@@ -20,6 +20,13 @@
       {%- endif -%}
   when: slapd_schema_custom_dn is not defined
 
+- name: 'Debug: Show slapd_schema_custom_dn'
+  debug:
+    msg: "{{ slapd_schema_custom_dn }}"
+  tags:
+    - never
+    - debug
+
 - name: "Ensure the {{ slapd_schema_custom }} schema was registered"
   become: true
   ldap_entry:
