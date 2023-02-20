@@ -48,6 +48,8 @@
         argv:
           - '{{ ldap_cmd_ldapadd }}'
           - -x
+          - -H
+          - ldapi:///
           - -D
           - '{{ ldap_admin_dn }}'
           - -w
