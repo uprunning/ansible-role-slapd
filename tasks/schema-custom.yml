@@ -27,13 +27,18 @@
     - never
     - debug
 
-- name: "Ensure the {{ slapd_schema_custom }} schema is deleted"
-  become: true
-  ldap_entry:
-    dn: "{{ slapd_schema_custom_dn }}"
-    objectClass: "olcSchemaConfig"
-    state: absent
+# Schema deleting was not possible: RESULT tag=107 err=53 SERVER UNWILLING TO PERFORM
+# conn=1027 op=2 DEL dn="cn={4}esis,cn=schema,cn=config"
+# conn=1027 op=2 RESULT tag=107 err=53 qtime=0.000014 etime=0.000040 text=
+# - name: "Ensure the {{ slapd_schema_custom }} schema is deleted"
+#   become: true
+#   ldap_entry:
+#     dn: "{{ slapd_schema_custom_dn }}"
+#     objectClass: "olcSchemaConfig"
+#     state: absent
 
+# ldap_entry does not check existence of attributes as a result following error is thrown.
+# 'Other (e.g., implementation specific) error', 'info': 'olcAttributeTypes: Duplicate attributeType: \"2.25.896523589646542388.1\"'}", "msg": "Entry action failed."}
 - name: "Ensure the {{ slapd_schema_custom }} schema was registered"
   become: true
   ldap_entry:
@@ -43,3 +48,4 @@
       cn: "misc"
       olcAttributeTypes: "{{ slapd_schema_custom_attributetypes }}"
       olcObjectClasses: "{{ slapd_schema_custom_objectclasses }}"
+  when: schema_custom.results[0] is not defined
