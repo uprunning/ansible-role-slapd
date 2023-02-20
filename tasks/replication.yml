@@ -88,7 +88,7 @@
                      'retry="5 5 300 5" timeout=1' -%}
       {%- for target in slapd_replication_target_list -%}
       {%-   set _ = r.append(stmt.format(rid=loop.index, url=target['url'],
-                                         passwd='secret')) -%}  # TODO: 決め打ちになっているのを修正する。
+                                         passwd=ldap_root_passwd)) -%}
       {%- endfor -%}
       {{ r | list }}
   when: slapd_replication_sync_conf_list is not defined
@@ -176,7 +176,7 @@
   tags:
     - slapd_replication
 
-# TODO: config database のレプリケーションの設定に失敗するので task を無効化しておく。
+# TODO: config database Invalidate the task because the replication setting fails.
 # See also: https://github.com/ktooi/ansible-role-slapd/issues/6
 #
 # - name: Ensure slapd of global config options included olcServerID
@@ -252,7 +252,7 @@
 # Now start up the provider and a consumer/s, also add the above LDIF to the first consumer, second consumer etc.
 # It will then replicate cn=config. You now have N-Way Multi-Provider on the config database.
 
-# TODO: config database のレプリケーションの設定に失敗するので task を無効化しておく。
+# TODO: config database Invalidate the task because the replication setting fails.
 # See also: https://github.com/ktooi/ansible-role-slapd/issues/6
 #
 # - name: Start up the provider and a consumer/s on the config database (1/2)
