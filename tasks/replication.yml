@@ -253,8 +253,8 @@
 #        credentials=secret searchbase="cn=config" type=refreshAndPersist
 #        retry="5 5 300 5" timeout=1
 #      -
-#      add: olcMirrorMode
-#      olcMirrorMode: TRUE
+#      add: olcMultiProvider
+#      olcMultiProvider: TRUE
 # Now start up the provider and a consumer/s, also add the above LDIF to the first consumer, second consumer etc.
 # It will then replicate cn=config. You now have N-Way Multi-Provider on the config database.
 
@@ -277,7 +277,7 @@
 #   ldap_attrs:
 #     dn: 'olcDatabase={0}config,cn=config'
 #     attributes:
-#       olcMirrorMode: 'TRUE'
+#       olcMultiProvider: 'TRUE'
 #     state: exact
 #   tags:
 #     - slapd_replication
@@ -304,7 +304,7 @@
 #      olcSyncRepl: rid=006 provider=$URI3 binddn="$MANAGERDN" bindmethod=simple
 #        credentials=$PASSWD searchbase="$BASEDN" type=refreshOnly
 #        interval=00:00:00:10 retry="5 5 300 5" timeout=1
-#      olcMirrorMode: TRUE
+#      olcMultiProvider: TRUE
 #
 
 - name: Start up the provider and a consumer/s on the backend (1/2)
@@ -326,7 +326,7 @@
   community.general.ldap_attrs:
     dn: '{{ slapd_olcDatabase_type_dn }}'
     attributes:
-      olcMirrorMode: 'TRUE'
+      olcMultiProvider: 'TRUE'
     state: exact
   tags:
     - slapd_replication
