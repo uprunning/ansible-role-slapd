@@ -29,3 +29,7 @@
     regex: '^SLAPD_SERVICES='
     line: 'SLAPD_SERVICES="ldap:/// ldapi:/// ldaps:///"'
   notify: restart slapd
+
+- name: Flush handlers
+  meta: flush_handlers
+
