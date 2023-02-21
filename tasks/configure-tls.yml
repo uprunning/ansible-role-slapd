@@ -15,7 +15,7 @@
 - name: Enforce TLS for LDAP 389 Port
   when: slapd_enforce_tls
   community.general.ldap_attrs:
-    dn: '{{ slapd_olcDatabase_type_dn }},cn=config'
+    dn: '{{ slapd_olcDatabase_type_dn }}'
     bind_dn: "cn=admin,cn=config"
     bind_pw: "{{ ldap_root_passwd }}"
     attributes:
