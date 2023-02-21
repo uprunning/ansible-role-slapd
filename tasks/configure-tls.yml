@@ -1,0 +1,24 @@
+---
+- name: Configure TLS Certificate Attributes
+  community.general.ldap_attrs:
+    dn: cn=config
+    bind_dn: "cn=admin,cn=config"
+    bind_pw: "{{ ldap_root_passwd }}"
+    attributes:
+      olcTLSCACertificateFile: "{{ ca_path[ansible_os_family] }}/{{ ca_certificate_file }}"
+      olcTLSCertificateFile: "{{ ldap_tls_cert }}"
+      olcTLSCertificateKeyFile: "{{ ldap_tls_key }}"
+    state: exact
+  notify: restart slapd
+
+
+- name: Enforce TLS for LDAP 389 Port
+  when: slapd_enforce_tls
+  community.general.ldap_attrs:
+    dn: '{{ slapd_olcDatabase_type_dn }},cn=config'
+    bind_dn: "cn=admin,cn=config"
+    bind_pw: "{{ ldap_root_passwd }}"
+    attributes:
+      olcSecurity: tls=1
+    state: exact
+  notify: restart slapd
