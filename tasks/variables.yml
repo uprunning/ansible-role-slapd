@@ -164,3 +164,7 @@
 - name: Define slapd_sysconfig_file
   set_fact:
     slapd_sysconfig_file: "{{ __slapd_sysconfig_file }}"
+
+- name: Define slapd_ca_path
+  set_fact:
+    slapd_ca_path: "{{ __slapd_ca_path }}"

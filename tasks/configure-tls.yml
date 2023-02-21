@@ -5,7 +5,7 @@
     bind_dn: "cn=admin,cn=config"
     bind_pw: "{{ ldap_root_passwd }}"
     attributes:
-      olcTLSCACertificateFile: "{{ ca_path[ansible_os_family] }}/{{ ca_certificate_file }}"
+      olcTLSCACertificateFile: "{{ slapd_ca_path }}/{{ ca_certificate_file }}"
       olcTLSCertificateFile: "{{ sldapd_tls_cert }}"
       olcTLSCertificateKeyFile: "{{ sldapd_tls_key }}"
     state: exact
