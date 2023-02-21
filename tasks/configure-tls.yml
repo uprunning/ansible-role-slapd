@@ -22,3 +22,10 @@
       olcSecurity: tls=1
     state: exact
   notify: restart slapd
+
+- name: Modify slapd configuration
+  ansible.builtin.lineinfile:
+    path: "{{ slapd_sysconfig_file }}"
+    regex: '^SLAPD_SERVICES='
+    line: 'SLAPD_SERVICES="ldap:/// ldapi:/// ldaps:///"'
+  notify: restart slapd

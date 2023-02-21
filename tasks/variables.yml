@@ -160,3 +160,7 @@
   when: slapd_cmd_slapcat is not defined
   tags:
     - always
+
+- name: Define slapd_sysconfig_file
+  set_fact:
+    slapd_sysconfig_file: "{{ __slapd_sysconfig_file }}"
