@@ -69,7 +69,10 @@ ldap_admin_passwd: "admin_passwd"
 # ldap_root_hashed_passwd: '{SSHA}WA/exo2HKC1H4EsOUxGbWU6mW0eT1A1K'
 # ldap_admin_hashed_passwd: '{SSHA}a5gsMFahundHCuqNYeVrhX3QO6ZXCI+/'
 
+
 slapd_configure_tls: false
+# sldapd_tls_key: <fullpath>
+# sldapd_tls_cert: <fullpath>
 slapd_enforce_tls: false
 
 # Select whether or not to install the schemas.

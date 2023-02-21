@@ -6,8 +6,8 @@
     bind_pw: "{{ ldap_root_passwd }}"
     attributes:
       olcTLSCACertificateFile: "{{ ca_path[ansible_os_family] }}/{{ ca_certificate_file }}"
-      olcTLSCertificateFile: "{{ ldap_tls_cert }}"
-      olcTLSCertificateKeyFile: "{{ ldap_tls_key }}"
+      olcTLSCertificateFile: "{{ sldapd_tls_cert }}"
+      olcTLSCertificateKeyFile: "{{ sldapd_tls_key }}"
     state: exact
   notify: restart slapd
 
