@@ -52,7 +52,9 @@ slapd_replication_group: 'slapd'
 slapd_replication_uri_list:
   - "ldap://ldap1.example.com"
   - "ldap://ldap2.example.com"
-# Set this to one of never|allow|try|demand if using LDAPS for replication.
+# Set this to one of yes|critical if START TLS extension must be used during replication.
+# slapd_replication_starttls:
+# Set this to one of never|allow|try|demand if using TLS for replication. (either LDAP with STARTTLS or LDAPS)
 # slapd_replication_tls_reqcert:
 
 # Users credential.

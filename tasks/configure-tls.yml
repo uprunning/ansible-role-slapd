@@ -12,7 +12,7 @@
   notify: restart slapd
 
 
-- name: Enforce TLS for LDAP 389 Port
+- name: Enforce TLS for LDAP
   when: slapd_enforce_tls
   community.general.ldap_attrs:
     dn: '{{ slapd_olcDatabase_type_dn }}'
