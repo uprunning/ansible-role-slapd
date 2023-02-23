@@ -27,7 +27,7 @@
   ansible.builtin.lineinfile:
     path: "{{ slapd_sysconfig_file }}"
     regex: '^SLAPD_SERVICES='
-    line: 'SLAPD_SERVICES="ldap:/// ldapi:/// ldaps:///"'
+    line: 'SLAPD_SERVICES="{{ slapd_services }}"'
   notify: restart slapd
 
 - name: Flush handlers
